@@ -1,5 +1,8 @@
 import {DomListener} from './DomListener';
 
 export abstract class ExcelComponent extends DomListener {
-  abstract toHTML(): string
+  className: string
+  toHTML(): string {
+    return ''
+  }
 }
