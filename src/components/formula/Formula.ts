@@ -1,7 +1,7 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Formula extends ExcelComponent {
-  className = 'excel__formula'
+  static className = 'excel__formula'
 
   toHTML() {
     return `
