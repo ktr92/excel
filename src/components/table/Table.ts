@@ -1,7 +1,7 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Table extends ExcelComponent {
-  className = 'excel__table'
+  static className = 'excel__table'
   toHTML() {
     return `
       <div class="row">

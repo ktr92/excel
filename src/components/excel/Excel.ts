@@ -1,9 +1,13 @@
 import {ExcelComponent} from 'src/core/ExcelComponent'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Constructor = new (...args: any) => ExcelComponent
+import {$} from 'src/core/dom'
 
 type ExcelArray = Array<Constructor>
+
+interface Constructor {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (...args: any): ExcelComponent,
+  className: string
+}
 
 interface ExcelOptions {
   components: ExcelArray
@@ -22,13 +26,12 @@ export class Excel {
   }
 
   private getRoot() {
-    const $root = document.createElement('div')
-    $root.classList.add(this.className)
+    const $root = $.create('div', 'excel')
 
     this.components.forEach(Component => {
-      const $el = document.createElement('div')
+      // eslint-disable-next-line max-len
+      const $el = $.create('div', Component.className)
       const component = new Component($el)
-      $el.classList.add(component.className)
       $el.innerHTML = component.toHTML()
       $root.append($el)
     })
