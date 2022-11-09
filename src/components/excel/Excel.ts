@@ -1,5 +1,5 @@
 import {ExcelComponent} from 'src/core/ExcelComponent'
-import {$} from 'src/core/dom'
+import {$, Dom} from 'src/core/dom'
 
 type ExcelArray = Array<Constructor>
 
@@ -15,13 +15,13 @@ interface ExcelOptions {
 
 export class Excel {
   className = 'excel'
-  private $el: HTMLElement
+  private $el: Dom
   private components: ExcelArray
   constructor(
     private selector: string,
     private options: ExcelOptions
   ) {
-    this.$el = document.querySelector(selector)
+    this.$el = $(selector)
     this.components = options.components || []
   }
 
@@ -32,7 +32,7 @@ export class Excel {
       // eslint-disable-next-line max-len
       const $el = $.create('div', Component.className)
       const component = new Component($el)
-      $el.innerHTML = component.toHTML()
+      $el.html(component.toHTML())
       $root.append($el)
     })
 

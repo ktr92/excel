@@ -19,6 +19,7 @@ module.exports = {
     'arrow-parens': 'off',
     'comma-dangle': 'off',
     'require-jsdoc': 'off',
-    '@typescript-eslint/no-var-requires': 0
+    '@typescript-eslint/no-var-requires': 0,
+    'operator-linebreak': 'off'
   },
 };
