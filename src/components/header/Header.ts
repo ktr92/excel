@@ -1,6 +1,13 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Header extends ExcelComponent {
+  constructor($root: HTMLElement) {
+    super($root, {
+      name: 'Header',
+      listeners: ['input']
+    })
+  }
+
   static className = 'excel__header'
   toHTML() {
     return `

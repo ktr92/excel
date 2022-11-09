@@ -1,6 +1,13 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Table extends ExcelComponent {
+  constructor($root: HTMLElement) {
+    super($root, {
+      name: 'Table',
+      listeners: ['input']
+    })
+  }
+
   static className = 'excel__table'
   toHTML() {
     return `
