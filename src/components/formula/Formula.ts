@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {ExcelComponent} from '../../core/ExcelComponent';
+import {Dom} from '../../core/dom'
 
 export class Formula extends ExcelComponent {
-  constructor($root: HTMLElement) {
+  constructor($root: Dom) {
     super($root, {
       name: 'Formula',
       listeners: ['input']
@@ -9,6 +11,13 @@ export class Formula extends ExcelComponent {
   }
 
   static className = 'excel__formula'
+
+  onInput(e: any) {
+    console.log(e.target.textContent.trim())
+  }
+  onClick() {
+    console.log(this)
+  }
 
   toHTML() {
     return `

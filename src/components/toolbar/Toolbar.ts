@@ -1,7 +1,8 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
+import {Dom} from '../../core/dom'
 
 export class Toolbar extends ExcelComponent {
-  constructor($root: HTMLElement) {
+  constructor($root: Dom) {
     super($root, {
       name: 'Toolbar',
       listeners: ['input']
@@ -9,6 +10,13 @@ export class Toolbar extends ExcelComponent {
   }
 
   static className = 'excel__toolbar'
+  onInput() {
+    console.log(this)
+  }
+  onClick() {
+    console.log(this)
+  }
+
   toHTML() {
     return `
       <div class="button">

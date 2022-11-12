@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // Class for work at DOM
 export class Dom {
-  private $el
+  private $el: HTMLElement
   constructor(selector: string | HTMLElement) {
     this.$el = typeof selector === 'string' ?
     document.querySelector(selector) :
@@ -20,16 +22,23 @@ export class Dom {
     return this
   }
 
+  on(eventType: string, callback: (ev: Event) => any) {
+    this.$el.addEventListener(eventType, callback)
+  }
+  off(eventType: string, callback: (ev: Event) => any) {
+    this.$el.removeEventListener(eventType, callback)
+  }
+
   append(node: Dom | Element) {
     if (node instanceof Dom) {
       node = node.$el
     }
-
-    if (Element.prototype.append) {
+    this.$el.append(node)
+    /* if (Element.prototype.append) {
       this.$el.append(node)
     } else {
       this.$el.appendChild(node)
-    }
+    } */
 
     return this
   }

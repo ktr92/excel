@@ -1,4 +1,5 @@
 import {DomListener} from './DomListener';
+import {Dom} from './dom'
 
 interface DomOptions {
   name: string,
@@ -6,7 +7,7 @@ interface DomOptions {
 }
 
 export abstract class ExcelComponent extends DomListener {
-  constructor($root: HTMLElement, options: DomOptions) {
+  constructor($root: Dom, options: DomOptions) {
     super($root, options.listeners)
   }
 
@@ -17,5 +18,9 @@ export abstract class ExcelComponent extends DomListener {
 
   init() {
     this.initDOMListeners()
+  }
+
+  destroy() {
+    this.removeDOMListeners()
   }
 }

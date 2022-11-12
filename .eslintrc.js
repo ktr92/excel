@@ -20,6 +20,8 @@ module.exports = {
     'comma-dangle': 'off',
     'require-jsdoc': 'off',
     '@typescript-eslint/no-var-requires': 0,
-    'operator-linebreak': 'off'
+    'operator-linebreak': 'off',
+    'no-explicit-any': 'off',
+
   },
 };

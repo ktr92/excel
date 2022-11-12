@@ -1,7 +1,8 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
+import {Dom} from '../../core/dom'
 
 export class Table extends ExcelComponent {
-  constructor($root: HTMLElement) {
+  constructor($root: Dom) {
     super($root, {
       name: 'Table',
       listeners: ['input']
@@ -9,6 +10,13 @@ export class Table extends ExcelComponent {
   }
 
   static className = 'excel__table'
+  onInput() {
+    console.log(this)
+  }
+  onClick() {
+    console.log(this)
+  }
+
   toHTML() {
     return `
       <div class="row">
