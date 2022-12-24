@@ -26,6 +26,7 @@ function createRow(content: string, index?: string) {
         ${index || ''}
         ${resize}
       </div>
+
       <div class="row-data">${content}</div>
     </div>
   `

@@ -5,6 +5,7 @@
     "noImplicitAny": true,
     //"strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
+
     "strict": false,
     "module": "es6",
     "target": "es5",
@@ -19,5 +20,6 @@
       "es2016",
       "dom"
     ]
+
   }
 }

@@ -4,11 +4,13 @@ import {Dom} from '../../core/dom'
 import {createTable} from './table.template';
 import {resizeHandler} from './table.resize';
 
+
 export class Table extends ExcelComponent {
   constructor($root: Dom) {
     super($root, {
       name: 'Table',
       listeners: ['mousedown']
+
     })
   }
 
@@ -31,6 +33,7 @@ export class Table extends ExcelComponent {
 
   onMouseup() {
     console.log('mouseup')
+
   }
 
   toHTML() {

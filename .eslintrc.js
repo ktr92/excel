@@ -23,6 +23,5 @@ module.exports = {
     'operator-linebreak': 'off',
     'no-explicit-any': 'off',
     'max-len': 'off'
-
   },
 };
