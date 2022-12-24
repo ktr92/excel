@@ -62,11 +62,21 @@ export class Dom {
   findAll(selector: string) {
     return this.$el.querySelectorAll(selector)
   }
+  find(selector: string) {
+    return $(this.$el.querySelector(selector))
+  }
 
   css(styles: Style) {
     Object
         .keys(styles)
         .forEach((key: string) => (this.$el as HTMLElement).style[key] = styles[key])
+  }
+
+  addClass(className: string) {
+    this.$el.classList.add(className)
+  }
+  removeClass(className: string) {
+    this.$el.classList.remove(className)
   }
 
   get data() {

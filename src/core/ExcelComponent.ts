@@ -9,6 +9,11 @@ interface DomOptions {
 export abstract class ExcelComponent extends DomListener {
   constructor($root: Dom, options: DomOptions) {
     super($root, options.listeners)
+    this.prepare()
+  }
+
+  prepare(): void {
+    return void 0
   }
 
   static className: string
