@@ -1,9 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+type tSelector = string | HTMLElement | Element
+interface Style {
+  [key: string]: string | number,
+  width?: string,
+  height?: string,
+  opacity?: number,
+  right?: string,
+  bottom?: string
+}
 // Class for work at DOM
 export class Dom {
-  private $el: HTMLElement
-  constructor(selector: string | HTMLElement) {
+  $el: HTMLElement | Element
+  constructor(selector: tSelector) {
     this.$el = typeof selector === 'string' ?
     document.querySelector(selector) :
     selector
@@ -42,9 +50,31 @@ export class Dom {
 
     return this
   }
+
+  closest(selector: string): Dom {
+    return $(this.$el.closest(selector))
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  findAll(selector: string) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles: Style) {
+    Object
+        .keys(styles)
+        .forEach((key: string) => (this.$el as HTMLElement).style[key] = styles[key])
+  }
+
+  get data() {
+    return (this.$el as HTMLElement).dataset
+  }
 }
 
-export function $(selector: string | HTMLElement) {
+export function $(selector: tSelector) {
   return new Dom(selector)
 }
 
