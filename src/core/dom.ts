@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type tSelector = string | HTMLElement | Element
-interface Style {
+ interface IStyle {
   [key: string]: string | number,
   width?: string,
   height?: string,
   opacity?: number,
   right?: string,
   bottom?: string
+}
+export interface ICell {
+  row: number,
+  col: number
 }
 // Class for work at DOM
 export class Dom {
@@ -24,6 +28,18 @@ export class Dom {
       return this
     }
     return this.$el.outerHTML.trim()
+  }
+
+  text(text?: string) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLocaleLowerCase() === 'input') {
+      return (this.$el as HTMLInputElement).value.trim()
+    }
+
+    return this.$el.textContent.trim()
   }
 
   clear() {
@@ -63,11 +79,39 @@ export class Dom {
   findAll(selector: string) {
     return this.$el.querySelectorAll(selector)
   }
+  find(selector: string) {
+    return $(this.$el.querySelector(selector))
+  }
 
-  css(styles: Style) {
+  css(styles: IStyle) {
     Object
         .keys(styles)
         .forEach((key: string) => (this.$el as HTMLElement).style[key] = styles[key])
+  }
+
+  addClass(className: string) {
+    this.$el.classList.add(className)
+  }
+  removeClass(className: string) {
+    this.$el.classList.remove(className)
+  }
+
+  id(): string {
+    return (this.$el as HTMLElement).dataset.id
+  }
+
+  focus() {
+    (this.$el as HTMLElement).focus()
+    return this
+  }
+
+  idCell(): ICell {
+    const parsed = (this.id() as string).split(':')
+    const cell: ICell = {
+      row: +parsed[0],
+      col: +parsed[1]
+    }
+    return cell
   }
 
   get data() {

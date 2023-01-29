@@ -11,9 +11,15 @@ function toColumn(col: string, index: number) {
     </div>
   `
 }
+/*
+function toCell(row: number, col: number):string {
+  return `<div class="cell" data-col="${col}" data-row="${row}" contenteditable></div>`
+} */
 
-function toCell(_: never, col: number):string {
-  return `<div class="cell" data-col="${col}" contenteditable></div>`
+function toCell(row: number) {
+  return function(_: never, col: number):string {
+    return `<div class="cell" data-col="${col}" data-id="${row}:${col}" data-type="cell" contenteditable></div>`
+  }
 }
 
 function createRow(content: string, index?: string) {
@@ -48,12 +54,12 @@ export function createTable(rowsCount = 15): string {
 
   rows.push(createRow(cols))
 
-  for (let i = 0; i < rowsCount; i++) {
+  for (let row = 0; row < rowsCount; row++) {
     const cells: string = new Array(colsCount)
         .fill('')
-        .map(toCell)
+        .map(toCell(row))
         .join('')
-    rows.push(createRow(cells, (i + 1).toString()))
+    rows.push(createRow(cells, (row + 1).toString()))
   }
 
   return rows.join('')

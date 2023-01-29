@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {Dom} from '../../core/dom'
 
 export class Header extends ExcelComponent {
-  constructor($root: Dom) {
+  constructor($root: Dom, options: any) {
     super($root, {
       name: 'Header',
-      listeners: ['input']
+      listeners: ['input', 'click'],
+      ...options
     })
   }
 
