@@ -29,6 +29,18 @@ export class Dom {
     return this.$el.outerHTML.trim()
   }
 
+  text(text: string) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLocaleLowerCase() === 'input') {
+      return (this.$el as HTMLInputElement).value.trim()
+    }
+
+    return this.$el.outerHTML.trim()
+  }
+
   clear() {
     this.html('')
     return this

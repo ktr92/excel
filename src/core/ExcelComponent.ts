@@ -1,14 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {DomListener} from './DomListener';
 import {Dom} from './dom'
+import {CallbackFunction, Emitter} from './Emitter';
 
 interface DomOptions {
   name: string,
-  listeners: Array<string>
+  listeners: Array<string>,
+  emitter: Emitter,
+  unsubs: Array<CallbackFunction>
 }
 
 export abstract class ExcelComponent extends DomListener {
   constructor($root: Dom, options: DomOptions) {
     super($root, options.listeners)
+    this.emitter = options.emitter
+    this.unsubs = []
     this.prepare()
   }
 
@@ -25,7 +31,17 @@ export abstract class ExcelComponent extends DomListener {
     this.initDOMListeners()
   }
 
+  $emit(eventName: string, ...args: any[]) {
+    this.emitter.emit(eventName, ...args)
+  }
+
+  $on(eventName: string, fn: CallbackFunction) {
+    const unsub = this.emitter.subscribe(eventName, fn)
+    this.unsubs.push(unsub)
+  }
+
   destroy() {
     this.removeDOMListeners()
+    this.unsubs.forEach((unsub: CallbackFunction) => unsub())
   }
 }

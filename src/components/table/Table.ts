@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {$, Dom} from '../../core/dom'
@@ -7,10 +8,11 @@ import {TableSelection} from './TableSelection';
 import {matrix, nextSelector} from './table.functions';
 
 export class Table extends ExcelComponent {
-  constructor($root: Dom) {
+  constructor($root: Dom, options: any) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown']
+      listeners: ['mousedown', 'keydown', 'input'],
+      ...options
     })
   }
 
@@ -39,6 +41,13 @@ export class Table extends ExcelComponent {
     super.init()
     const $cell = this.$root.find('[data-id="0:0"]')
     this.selection.select($cell)
+    this.$on('formula:typing', (text:string) => {
+      this.selection.current.text(text)
+    })
+
+    this.$on('formula:done', () => {
+      this.selection.current.focus()
+    })
   }
 
   onMousedown(event: MouseEvent) {
@@ -58,6 +67,10 @@ export class Table extends ExcelComponent {
         }
       }
     }
+  }
+
+  onInput(e: any) {
+    this.$emit('table:typing', e.target.textContent.trim())
   }
 
   onKeydown(event: KeyboardEvent) {

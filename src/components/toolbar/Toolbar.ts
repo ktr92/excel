@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {Dom} from '../../core/dom'
 
@@ -5,6 +6,7 @@ export class Toolbar extends ExcelComponent {
   constructor($root: Dom, options: any) {
     super($root, {
       name: 'Toolbar',
+      listeners: ['input', 'click'],
       ...options
     })
   }

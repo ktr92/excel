@@ -6,18 +6,22 @@ export class Formula extends ExcelComponent {
   constructor($root: Dom, options: any) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options
     })
   }
 
   static className = 'excel__formula'
 
-  onInput(e: any) {
-    console.log(e.target.textContent.trim())
+  init() {
+    this.$on('table:typing', (text:string) => {
+      this.$root.find('.input').text(text)
+    })
   }
-  onClick() {
-    console.log(this)
+
+  onInput(e: any) {
+    const text = e.target.textContent.trim()
+    this.$emit('formula:typing', text)
   }
 
   toHTML() {
@@ -25,5 +29,15 @@ export class Formula extends ExcelComponent {
       <div class="info">fx</div>
       <div class="input" contenteditable spellcheck="false"></div>
     `
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    const {key} = event
+    switch (key) {
+      case 'Enter':
+        event.preventDefault()
+        this.$emit('formula:done')
+        break
+    }
   }
 }

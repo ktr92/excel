@@ -1,11 +1,15 @@
-type CallbackFunction = () => any
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type CallbackFunction = (any?: any) => any
 
-interface IListener {
+ interface IListener {
   eventName?: Array<CallbackFunction>
 }
 
 export class Emitter {
   listeners: IListener
+  constructor() {
+    this.listeners = {}
+  }
 
   // table.emit('table:select', () => {})
   emit(eventName: string, ...args: any[]) {
