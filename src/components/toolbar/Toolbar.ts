@@ -2,10 +2,10 @@ import {ExcelComponent} from '../../core/ExcelComponent';
 import {Dom} from '../../core/dom'
 
 export class Toolbar extends ExcelComponent {
-  constructor($root: Dom) {
+  constructor($root: Dom, options: any) {
     super($root, {
       name: 'Toolbar',
-      listeners: ['input']
+      ...options
     })
   }
 

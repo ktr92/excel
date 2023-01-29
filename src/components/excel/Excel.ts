@@ -1,5 +1,6 @@
 import {ExcelComponent} from 'src/core/ExcelComponent'
 import {$, Dom} from 'src/core/dom'
+import {Emitter} from 'src/core/Emitter'
 
 interface Constructor {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,12 +19,14 @@ export class Excel {
   private $el: Dom
   private components: ExcelArray
   private instances: InstancesArray
+  public emitter: Emitter
   constructor(
     private selector: string,
     private options: ExcelOptions
   ) {
     this.$el = $(selector)
     this.components = options.components || []
+    this.emitter = new Emitter
   }
 
   private getRoot() {

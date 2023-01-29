@@ -3,10 +3,11 @@ import {ExcelComponent} from '../../core/ExcelComponent';
 import {Dom} from '../../core/dom'
 
 export class Formula extends ExcelComponent {
-  constructor($root: Dom) {
+  constructor($root: Dom, options: any) {
     super($root, {
       name: 'Formula',
-      listeners: ['input']
+      listeners: ['input'],
+      ...options
     })
   }
 

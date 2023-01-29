@@ -3,14 +3,17 @@ import {Dom} from 'src/core/dom'
 export class TableSelection {
   static className = 'selected'
   group: Array<Dom>
+  current: Dom
   constructor() {
     this.group = []
+    this.current = null
   }
 
   select($el: Dom): void {
     this.clear()
+    this.current = $el
     this.group.push($el)
-    $el.addClass('selected')
+    $el.focus().addClass('selected')
   }
 
   clear() {
@@ -18,7 +21,9 @@ export class TableSelection {
     this.group = []
   }
 
-  /* selectGroup(): void {
-
-  } */
+  selectGroup($group: Array<Dom>): void {
+    this.clear()
+    this.group = $group
+    this.group.forEach($el => $el.addClass(TableSelection.className))
+  }
 }
