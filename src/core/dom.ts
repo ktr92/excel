@@ -29,7 +29,7 @@ export class Dom {
     return this.$el.outerHTML.trim()
   }
 
-  text(text: string) {
+  text(text?: string) {
     if (typeof text === 'string') {
       this.$el.textContent = text
       return this
@@ -38,7 +38,7 @@ export class Dom {
       return (this.$el as HTMLInputElement).value.trim()
     }
 
-    return this.$el.outerHTML.trim()
+    return this.$el.textContent.trim()
   }
 
   clear() {

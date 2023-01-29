@@ -40,7 +40,7 @@ export class Table extends ExcelComponent {
   init() {
     super.init()
     const $cell = this.$root.find('[data-id="0:0"]')
-    this.selection.select($cell)
+    this.selectCell($cell)
     this.$on('formula:typing', (text:string) => {
       this.selection.current.text(text)
     })
@@ -48,6 +48,11 @@ export class Table extends ExcelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
+  }
+
+  selectCell($cell: Dom) {
+    this.selection.select($cell)
+    this.$emit('table:select', $cell.text())
   }
 
   onMousedown(event: MouseEvent) {
@@ -63,6 +68,7 @@ export class Table extends ExcelComponent {
             this.selection.selectGroup($cells)
           } else {
             this.selection.select($target)
+            this.$emit('table:select', $target.text())
           }
         }
       }
@@ -89,7 +95,7 @@ export class Table extends ExcelComponent {
       event.preventDefault()
       const id = this.selection.current.idCell()
       const $next = this.$root.find(nextSelector(key, id))
-      this.selection.select($next)
+      this.selectCell($next)
     }
   }
 }

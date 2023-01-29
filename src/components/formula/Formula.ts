@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {Dom} from '../../core/dom'
+import {$} from '../../core/dom';
 
 export class Formula extends ExcelComponent {
   constructor($root: Dom, options: any) {
@@ -14,20 +15,26 @@ export class Formula extends ExcelComponent {
   static className = 'excel__formula'
 
   init() {
-    this.$on('table:typing', (text:string) => {
-      this.$root.find('.input').text(text)
+    super.init()
+
+    this.$formula = this.$root.find('#formula ')
+
+    this.$on('table:typing', text => {
+      this.$formula.text(text)
+    })
+    this.$on('table:select', text => {
+      this.$formula.text(text)
     })
   }
 
   onInput(e: any) {
-    const text = e.target.textContent.trim()
-    this.$emit('formula:typing', text)
+    this.$emit('formula:typing', $(e.target).text())
   }
 
   toHTML() {
     return `
       <div class="info">fx</div>
-      <div class="input" contenteditable spellcheck="false"></div>
+      <div id="formula" class="input" contenteditable spellcheck="false"></div>
     `
   }
 
@@ -35,6 +42,7 @@ export class Formula extends ExcelComponent {
     const {key} = event
     switch (key) {
       case 'Enter':
+      case 'Tab':
         event.preventDefault()
         this.$emit('formula:done')
         break
