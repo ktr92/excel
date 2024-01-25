@@ -16,7 +16,6 @@ export interface ICell {
 export class Dom {
   $el: HTMLElement | Element
   constructor(selector: tSelector) {
-
     this.$el = typeof selector === 'string' ?
     document.querySelector(selector) :
     selector
@@ -120,7 +119,6 @@ export class Dom {
 }
 
 export function $(selector: tSelector) {
-
   return new Dom(selector)
 }
 

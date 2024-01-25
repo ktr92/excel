@@ -7,7 +7,6 @@ import {resizeHandler} from './table.resize';
 import {TableSelection} from './TableSelection';
 import {matrix, nextSelector} from './table.functions';
 
-
 export class Table extends ExcelComponent {
   constructor($root: Dom, options: any) {
     super($root, {
@@ -28,7 +27,6 @@ export class Table extends ExcelComponent {
 
   onMouseup() {
     console.log('mouseup')
-
   }
 
   toHTML() {
